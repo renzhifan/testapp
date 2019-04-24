@@ -82,11 +82,20 @@ class LoginController extends Controller
     public function oauth()
     {
 
-        $query = http_build_query([
+        /*$query = http_build_query([
             'client_id' => config('services.auth.appid'),
             'redirect_uri' => config('services.auth.callback'),
             'response_type' => 'code',
             'scope' => '',
+        ]);
+
+        return redirect('http://oauth.renzhifan.cn/oauth/authorize?'.$query);*/
+        $query = http_build_query([
+            'client_id' => config('services.auth.appid'),
+            'redirect_uri' => config('services.auth.callback'),
+            'response_type' => 'code',
+//            'scope' => 'all-user-info get-post-info',
+            'scope' => 'all-user-info',
         ]);
 
         return redirect('http://oauth.renzhifan.cn/oauth/authorize?'.$query);
