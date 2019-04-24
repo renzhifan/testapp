@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/auth', 'Auth\LoginController@oauth');
 
 Route::get('/auth/callback', 'Auth\LoginController@callback');
+
+Route::get('/auth/client', 'Auth\LoginController@client');

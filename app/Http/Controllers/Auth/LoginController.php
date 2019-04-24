@@ -111,4 +111,20 @@ class LoginController extends Controller
 
         return response($response->getBody());
     }
+    public function client()
+    {
+        $http = new Client();
+        $response = $http->post('http://oauth.renzhifan.cn/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'client_credentials',
+                'client_id' => config('services.auth.appid'),  // your client id
+                'client_secret' => config('services.auth.secret'),   // your client secret
+                'scope' => '*'
+            ],
+        ]);
+
+        return response($response->getBody());
+    }
+
+
 }
