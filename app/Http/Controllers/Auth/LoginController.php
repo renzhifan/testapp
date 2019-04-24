@@ -79,4 +79,36 @@ class LoginController extends Controller
         }
 
     }
+    public function oauth()
+    {
+
+        $query = http_build_query([
+            'client_id' => config('services.auth.appid'),
+            'redirect_uri' => config('services.auth.callback'),
+            'response_type' => 'code',
+            'scope' => '',
+        ]);
+
+        return redirect('http://oauth.renzhifan.cn/oauth/authorize?'.$query);
+    }
+
+    public function callback(Request $request)
+    {
+        $code = $request->get('code');
+        if (!$code) {
+            dd('授权失败');
+        }
+        $http = new Client();
+        $response = $http->post(config('services.auth.redirect'), [
+            'form_params' => [
+                'grant_type' => 'authorization_code',
+                'client_id' => config('services.auth.appid'),  // your client id
+                'client_secret' => config('services.auth.secret'),   // your client secret
+                'redirect_uri' => config('services.auth.callback'),
+                'code' => $code,
+            ],
+        ]);
+
+        return response($response->getBody());
+    }
 }
