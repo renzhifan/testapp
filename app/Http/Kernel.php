@@ -60,6 +60,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'cas.auth'  => \Subfission\Cas\Middleware\CASAuth::class,
+        'cas.guest' => \Subfission\Cas\Middleware\RedirectCASAuthenticated::class,
     ];
 
     /**

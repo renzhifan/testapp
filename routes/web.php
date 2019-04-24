@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -24,3 +24,15 @@ Route::get('/auth', 'Auth\LoginController@oauth');
 Route::get('/auth/callback', 'Auth\LoginController@callback');
 
 Route::get('/auth/client', 'Auth\LoginController@client');
+
+Route::get('/login', function () {
+    return cas()->authenticate();
+});
+
+Route::middleware('cas.auth')->get('/logout', function () {
+    cas()->logout();
+});
+
+Route::middleware('cas.auth')->get('/user', function () {
+    return cas()->user();
+});
