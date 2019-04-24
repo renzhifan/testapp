@@ -47,6 +47,8 @@ return [
         'appid' => env('CLIENT_ID'),
         'secret' => env('CLIENT_SECRET'),
         'redirect' => env('REDIRECT_URl'),
+        'authorize' => env('REDIRECT_AUTHORIZE'),
+        'token' => env('REDIRECT_TOKEN'),
         'callback' => env('APP_URL').'/auth/callback'
     ]
 

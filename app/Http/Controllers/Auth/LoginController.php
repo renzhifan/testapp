@@ -89,7 +89,7 @@ class LoginController extends Controller
             'scope' => '',
         ]);
 
-        return redirect('http://oauth.renzhifan.cn/oauth/authorize?'.$query);*/
+        return redirect( config('services.auth.authorize').$query);*/
         $query = http_build_query([
             'client_id' => config('services.auth.appid'),
             'redirect_uri' => config('services.auth.callback'),
@@ -98,7 +98,7 @@ class LoginController extends Controller
             'scope' => 'all-user-info',
         ]);
 
-        return redirect('http://oauth.renzhifan.cn/oauth/authorize?'.$query);
+        return redirect( config('services.auth.authorize').$query);
     }
 
     public function callback(Request $request)
@@ -123,7 +123,7 @@ class LoginController extends Controller
     public function client()
     {
         $http = new Client();
-        $response = $http->post('http://oauth.renzhifan.cn/oauth/token', [
+        $response = $http->post(config('services.auth.token'), [
             'form_params' => [
                 'grant_type' => 'client_credentials',
                 'client_id' => config('services.auth.appid'),  // your client id
