@@ -62,7 +62,7 @@ class LoginController extends Controller
 
             $http = new Client();
             // 发送相关字段到后端应用获取授权令牌
-            $response = $http->post('http://oauth.renzhifan.cn/oauth/token', [
+            $response = $http->post(config('services.auth.redirect'), [
                 'form_params' => [
                     'grant_type' => 'password',
                     'client_id' => config('services.auth.appid'),
